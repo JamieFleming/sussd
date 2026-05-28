@@ -1,20 +1,141 @@
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import HomeScreen from './src/screens/HomeScreen';
+import SetupScreen from './src/screens/SetupScreen';
+import PlayerRevealScreen from './src/screens/PlayerRevealScreen';
+import WordRevealScreen from './src/screens/WordRevealScreen';
+import DiscussScreen from './src/screens/DiscussScreen';
+import VoteScreen from './src/screens/VoteScreen';
+import ResultScreen from './src/screens/ResultScreen';
+import DoubleDownScreen from './src/screens/DoubleDownScreen';
+import SettingsScreen from './src/screens/SettingsScreen';
+import CustomWordsScreen from './src/screens/CustomWordsScreen';
+import { loadSettings, saveSettings, loadCustomWords, saveCustomWords } from './src/utils/storage';
+
+const DEFAULT_SETTINGS = {
+  timerEnabled: true,
+  timerDuration: 60,
+  scoreboardEnabled: true,
+  categoriesEnabled: false,
+  customWordsEnabled: false,
+};
 
 export default function App() {
+  const [screen, setScreen] = useState('home');
+  const [gameState, setGameState] = useState(null);
+  const [settings, setSettings] = useState(DEFAULT_SETTINGS);
+  const [sessionScores, setSessionScores] = useState({
+    innocentsWins: 0,
+    imposterWins: 0,
+    gamesPlayed: 0,
+  });
+  const [customWords, setCustomWords] = useState([]);
+  const isFirstLoad = useRef(true);
+
+  // Load persisted data on launch
+  useEffect(() => {
+    async function hydrate() {
+      const [savedSettings, savedWords] = await Promise.all([
+        loadSettings(),
+        loadCustomWords(),
+      ]);
+      if (savedSettings) {
+        setSettings((prev) => ({ ...prev, ...savedSettings }));
+      }
+      if (savedWords) {
+        setCustomWords(savedWords);
+      }
+      isFirstLoad.current = false;
+    }
+    hydrate();
+  }, []);
+
+  // Persist settings whenever they change (skip the initial load)
+  useEffect(() => {
+    if (isFirstLoad.current) return;
+    saveSettings(settings);
+  }, [settings]);
+
+  // Persist custom words whenever they change (skip the initial load)
+  useEffect(() => {
+    if (isFirstLoad.current) return;
+    saveCustomWords(customWords);
+  }, [customWords]);
+
+  const navigate = useCallback((screenName, newGameState) => {
+    if (newGameState !== undefined) setGameState(newGameState);
+    setScreen(screenName);
+  }, []);
+
+  const updateSettings = useCallback((updates) => {
+    setSettings((prev) => ({ ...prev, ...updates }));
+  }, []);
+
+  const updateScore = useCallback((winner, points = 1) => {
+    setSessionScores((prev) => ({
+      gamesPlayed: prev.gamesPlayed + 1,
+      innocentsWins: prev.innocentsWins + (winner === 'innocents' ? points : 0),
+      imposterWins: prev.imposterWins + (winner === 'imposters' ? points : 0),
+    }));
+  }, []);
+
+  const resetScores = useCallback(() => {
+    setSessionScores({ innocentsWins: 0, imposterWins: 0, gamesPlayed: 0 });
+  }, []);
+
+  const renderScreen = () => {
+    switch (screen) {
+      case 'home':
+        return <HomeScreen navigate={navigate} />;
+      case 'setup':
+        return <SetupScreen navigate={navigate} settings={settings} customWords={customWords} />;
+      case 'playerReveal':
+        return <PlayerRevealScreen navigate={navigate} gameState={gameState} />;
+      case 'wordReveal':
+        return <WordRevealScreen navigate={navigate} gameState={gameState} />;
+      case 'discuss':
+        return <DiscussScreen navigate={navigate} gameState={gameState} settings={settings} />;
+      case 'vote':
+        return <VoteScreen navigate={navigate} gameState={gameState} />;
+      case 'doubleDown':
+        return <DoubleDownScreen navigate={navigate} gameState={gameState} />;
+      case 'result':
+        return (
+          <ResultScreen
+            navigate={navigate}
+            gameState={gameState}
+            settings={settings}
+            sessionScores={sessionScores}
+            onScoreUpdate={updateScore}
+          />
+        );
+      case 'settings':
+        return (
+          <SettingsScreen
+            navigate={navigate}
+            settings={settings}
+            onSettingsChange={updateSettings}
+            sessionScores={sessionScores}
+            onResetScores={resetScores}
+          />
+        );
+      case 'customWords':
+        return (
+          <CustomWordsScreen
+            navigate={navigate}
+            customWords={customWords}
+            onCustomWordsChange={setCustomWords}
+          />
+        );
+      default:
+        return <HomeScreen navigate={navigate} />;
+    }
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <StatusBar style="light" />
+      {renderScreen()}
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
