@@ -9,7 +9,7 @@ export const CATEGORIES = [
 
 // category: 'general' = appears in All only, not filterable
 export const wordSets = [
-  // Food & Drink
+  // ── Food & Drink ──────────────────────────────────────────────────
   { category: 'food', pair: ['Pizza', 'Burger'] },
   { category: 'food', pair: ['Coffee', 'Tea'] },
   { category: 'food', pair: ['Beer', 'Cider'] },
@@ -22,8 +22,23 @@ export const wordSets = [
   { category: 'food', pair: ['Pancakes', 'Waffles'] },
   { category: 'food', pair: ['Wine', 'Prosecco'] },
   { category: 'food', pair: ['Steak', 'Lamb Chop'] },
+  { category: 'food', pair: ['Croissant', 'Pain au Chocolat'] },
+  { category: 'food', pair: ['Ramen', 'Pho'] },
+  { category: 'food', pair: ['Tacos', 'Burritos'] },
+  { category: 'food', pair: ['Ice Cream', 'Gelato'] },
+  { category: 'food', pair: ['Cheesecake', 'Tiramisu'] },
+  { category: 'food', pair: ['Hot Dog', 'Bratwurst'] },
+  { category: 'food', pair: ['Milkshake', 'Smoothie'] },
+  { category: 'food', pair: ['Fried Chicken', 'Fried Fish'] },
+  { category: 'food', pair: ['Champagne', 'Sparkling Wine'] },
+  { category: 'food', pair: ['Doughnut', 'Bagel'] },
+  { category: 'food', pair: ['Mac and Cheese', 'Lasagne'] },
+  { category: 'food', pair: ['Nachos', 'Loaded Fries'] },
+  { category: 'food', pair: ['Roast Dinner', 'BBQ'] },
+  { category: 'food', pair: ['Gin & Tonic', 'Rum & Coke'] },
+  { category: 'food', pair: ['Chocolate', 'Sweets'] },
 
-  // Sport
+  // ── Sport ─────────────────────────────────────────────────────────
   { category: 'sport', pair: ['Football', 'Rugby'] },
   { category: 'sport', pair: ['Tennis', 'Badminton'] },
   { category: 'sport', pair: ['Swimming', 'Diving'] },
@@ -31,8 +46,23 @@ export const wordSets = [
   { category: 'sport', pair: ['Golf', 'Cricket'] },
   { category: 'sport', pair: ['Basketball', 'Netball'] },
   { category: 'sport', pair: ['Cycling', 'Running'] },
+  { category: 'sport', pair: ['Skiing', 'Snowboarding'] },
+  { category: 'sport', pair: ['Surfing', 'Paddleboarding'] },
+  { category: 'sport', pair: ['Yoga', 'Pilates'] },
+  { category: 'sport', pair: ['Karate', 'Judo'] },
+  { category: 'sport', pair: ['Darts', 'Snooker'] },
+  { category: 'sport', pair: ['Horse Racing', 'Greyhound Racing'] },
+  { category: 'sport', pair: ['Formula 1', 'MotoGP'] },
+  { category: 'sport', pair: ['Rock Climbing', 'Bouldering'] },
+  { category: 'sport', pair: ['Ice Hockey', 'Ice Skating'] },
+  { category: 'sport', pair: ['Trampolining', 'Gymnastics'] },
+  { category: 'sport', pair: ['Rowing', 'Kayaking'] },
+  { category: 'sport', pair: ['American Football', 'Rugby League'] },
+  { category: 'sport', pair: ['Table Tennis', 'Squash'] },
+  { category: 'sport', pair: ['Skateboarding', 'BMX'] },
+  { category: 'sport', pair: ['Weightlifting', 'CrossFit'] },
 
-  // Places
+  // ── Places ────────────────────────────────────────────────────────
   { category: 'places', pair: ['Beach', 'Pool'] },
   { category: 'places', pair: ['Cinema', 'Theatre'] },
   { category: 'places', pair: ['Pub', 'Bar'] },
@@ -43,8 +73,21 @@ export const wordSets = [
   { category: 'places', pair: ['Airport', 'Train Station'] },
   { category: 'places', pair: ['Gym', 'Sports Hall'] },
   { category: 'places', pair: ['Library', 'Museum'] },
+  { category: 'places', pair: ['Wedding', 'Christening'] },
+  { category: 'places', pair: ['Casino', 'Arcade'] },
+  { category: 'places', pair: ['Spa', 'Sauna'] },
+  { category: 'places', pair: ['Zoo', 'Aquarium'] },
+  { category: 'places', pair: ['Church', 'Mosque'] },
+  { category: 'places', pair: ['Supermarket', 'Corner Shop'] },
+  { category: 'places', pair: ['Theme Park', 'Funfair'] },
+  { category: 'places', pair: ['Campsite', 'Caravan Park'] },
+  { category: 'places', pair: ['Rooftop Bar', 'Penthouse'] },
+  { category: 'places', pair: ['Farm', 'Allotment'] },
+  { category: 'places', pair: ['Office', 'Co-working Space'] },
+  { category: 'places', pair: ['Shopping Centre', 'Outlet Village'] },
+  { category: 'places', pair: ['Prison', 'Police Station'] },
 
-  // Entertainment
+  // ── Entertainment ─────────────────────────────────────────────────
   { category: 'entertainment', pair: ['TikTok', 'Instagram'] },
   { category: 'entertainment', pair: ['Netflix', 'Disney+'] },
   { category: 'entertainment', pair: ['Podcast', 'Radio'] },
@@ -52,8 +95,21 @@ export const wordSets = [
   { category: 'entertainment', pair: ['YouTube', 'Twitch'] },
   { category: 'entertainment', pair: ['PlayStation', 'Xbox'] },
   { category: 'entertainment', pair: ['Concert', 'Rave'] },
+  { category: 'entertainment', pair: ['WhatsApp', 'iMessage'] },
+  { category: 'entertainment', pair: ['Snapchat', 'BeReal'] },
+  { category: 'entertainment', pair: ['Minecraft', 'Roblox'] },
+  { category: 'entertainment', pair: ['Escape Room', 'Murder Mystery'] },
+  { category: 'entertainment', pair: ['Karaoke', 'Open Mic Night'] },
+  { category: 'entertainment', pair: ['Anime', 'Manga'] },
+  { category: 'entertainment', pair: ['Video Call', 'Phone Call'] },
+  { category: 'entertainment', pair: ['Stand-Up Comedy', 'Improv'] },
+  { category: 'entertainment', pair: ['Reality TV', 'Documentary'] },
+  { category: 'entertainment', pair: ['Board Game', 'Card Game'] },
+  { category: 'entertainment', pair: ['Vinyl Record', 'CD'] },
+  { category: 'entertainment', pair: ['Twitter', 'Reddit'] },
+  { category: 'entertainment', pair: ['Video Game', 'Mobile Game'] },
 
-  // Funny / Adult
+  // ── Funny / Adult ─────────────────────────────────────────────────
   { category: 'funny', pair: ['Hangover', 'Food Poisoning'] },
   { category: 'funny', pair: ['Ex', 'Situationship'] },
   { category: 'funny', pair: ['Uber', 'Taxi'] },
@@ -64,8 +120,21 @@ export const wordSets = [
   { category: 'funny', pair: ['Fake Tan', 'Sun Bed'] },
   { category: 'funny', pair: ['Morning Breath', 'Garlic Breath'] },
   { category: 'funny', pair: ['Group Chat', 'WhatsApp'] },
+  { category: 'funny', pair: ['Walk of Shame', 'Walk of Fame'] },
+  { category: 'funny', pair: ['Ghosting', 'Leaving on Read'] },
+  { category: 'funny', pair: ['FOMO', 'JOMO'] },
+  { category: 'funny', pair: ['Nap', 'Hibernation'] },
+  { category: 'funny', pair: ['Drunk Text', 'Emotional Voicemail'] },
+  { category: 'funny', pair: ['Man Flu', 'Actual Flu'] },
+  { category: 'funny', pair: ['Passive Aggressive Note', 'Strongly Worded Email'] },
+  { category: 'funny', pair: ['Serial Dater', 'Commitment Phobe'] },
+  { category: 'funny', pair: ['Gym Selfie', 'Mirror Selfie'] },
+  { category: 'funny', pair: ['Catfish', 'Scammer'] },
+  { category: 'funny', pair: ['Body Odour', 'Cheap Perfume'] },
+  { category: 'funny', pair: ['Snooze Button', 'Sleep Talking'] },
+  { category: 'funny', pair: ['Impulse Buy', 'Treat Yourself'] },
 
-  // General — included in All but not a specific filter
+  // ── General (All only) ────────────────────────────────────────────
   { category: 'general', pair: ['Cat', 'Dog'] },
   { category: 'general', pair: ['Lion', 'Tiger'] },
   { category: 'general', pair: ['Dolphin', 'Shark'] },
@@ -76,4 +145,14 @@ export const wordSets = [
   { category: 'general', pair: ['Alarm Clock', 'Lie In'] },
   { category: 'general', pair: ['Driving', 'Cycling'] },
   { category: 'general', pair: ['Landlord', 'Estate Agent'] },
+  { category: 'general', pair: ['Sunset', 'Sunrise'] },
+  { category: 'general', pair: ['River', 'Lake'] },
+  { category: 'general', pair: ['Mountain', 'Volcano'] },
+  { category: 'general', pair: ['Butterfly', 'Moth'] },
+  { category: 'general', pair: ['Parrot', 'Toucan'] },
+  { category: 'general', pair: ['Astronaut', 'Pilot'] },
+  { category: 'general', pair: ['Chef', 'Baker'] },
+  { category: 'general', pair: ['Vampire', 'Werewolf'] },
+  { category: 'general', pair: ['Robot', 'Alien'] },
+  { category: 'general', pair: ['Sandcastle', 'Igloo'] },
 ];

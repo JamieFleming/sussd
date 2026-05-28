@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Privacy Policy — Suss'd</title>
+		<style>
+			*,
+			*::before,
+			*::after {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+
+			:root {
+				--bg: #000000;
+				--surface: #0f0000;
+				--card: #160000;
+				--border: rgba(220, 38, 38, 0.18);
+				--red: #dc2626;
+				--red-dim: rgba(220, 38, 38, 0.12);
+				--red-glow: rgba(220, 38, 38, 0.25);
+				--text: #ffffff;
+				--text-sec: rgba(255, 255, 255, 0.65);
+				--text-mute: rgba(255, 255, 255, 0.35);
+				--radius: 14px;
+				--radius-lg: 20px;
+			}
+
+			html {
+				scroll-behavior: smooth;
+			}
+
+			body {
+				background-color: var(--bg);
+				color: var(--text);
+				font-family:
+					-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+					sans-serif;
+				font-size: 16px;
+				line-height: 1.7;
+				-webkit-font-smoothing: antialiased;
+			}
+
+			/* ── Header ── */
+			header {
+				background: linear-gradient(180deg, #1a0000 0%, #000000 100%);
+				border-bottom: 1px solid var(--border);
+				padding: 56px 24px 48px;
+				text-align: center;
+			}
+
+			.logo-wrap {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 88px;
+				height: 88px;
+				border-radius: 22px;
+				overflow: hidden;
+				box-shadow:
+					0 0 0 1px var(--border),
+					0 0 32px var(--red-glow);
+				margin-bottom: 20px;
+			}
+
+			.logo-wrap img {
+				width: 100%;
+				height: 100%;
+				display: block;
+			}
+
+			.brand {
+				font-size: 13px;
+				font-weight: 700;
+				letter-spacing: 5px;
+				color: var(--red);
+				text-transform: uppercase;
+				margin-bottom: 8px;
+			}
+
+			header h1 {
+				font-size: clamp(28px, 5vw, 42px);
+				font-weight: 900;
+				letter-spacing: -1.5px;
+				color: var(--text);
+				margin-bottom: 12px;
+			}
+
+			.updated {
+				font-size: 12px;
+				font-weight: 600;
+				letter-spacing: 2px;
+				color: var(--text-mute);
+				text-transform: uppercase;
+			}
+
+			/* ── Layout ── */
+			main {
+				max-width: 740px;
+				margin: 0 auto;
+				padding: 48px 24px 80px;
+			}
+
+			.intro {
+				background: var(--red-dim);
+				border: 1px solid var(--border);
+				border-radius: var(--radius-lg);
+				padding: 24px 28px;
+				margin-bottom: 40px;
+				color: var(--text-sec);
+				font-size: 15px;
+				line-height: 1.75;
+			}
+
+			.intro strong {
+				color: var(--text);
+			}
+
+			/* ── Sections ── */
+			section {
+				margin-bottom: 12px;
+				background: var(--card);
+				border: 1px solid var(--border);
+				border-radius: var(--radius-lg);
+				overflow: hidden;
+			}
+
+			.section-header {
+				display: flex;
+				align-items: center;
+				gap: 14px;
+				padding: 22px 28px;
+				border-bottom: 1px solid var(--border);
+			}
+
+			.section-icon {
+				width: 36px;
+				height: 36px;
+				border-radius: 10px;
+				background: var(--red-dim);
+				border: 1px solid var(--border);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 17px;
+				flex-shrink: 0;
+			}
+
+			.section-header h2 {
+				font-size: 15px;
+				font-weight: 800;
+				letter-spacing: 0.5px;
+				color: var(--text);
+			}
+
+			.section-body {
+				padding: 24px 28px;
+				color: var(--text-sec);
+				font-size: 15px;
+			}
+
+			.section-body p {
+				margin-bottom: 14px;
+			}
+			.section-body p:last-child {
+				margin-bottom: 0;
+			}
+
+			.section-body ul {
+				list-style: none;
+				padding: 0;
+				margin: 10px 0 14px;
+			}
+
+			.section-body ul li {
+				display: flex;
+				align-items: flex-start;
+				gap: 10px;
+				padding: 6px 0;
+				color: var(--text-sec);
+			}
+
+			.section-body ul li::before {
+				content: "";
+				display: block;
+				width: 6px;
+				height: 6px;
+				border-radius: 50%;
+				background: var(--red);
+				margin-top: 9px;
+				flex-shrink: 0;
+			}
+
+			.section-body a {
+				color: var(--red);
+				text-decoration: none;
+				font-weight: 500;
+			}
+
+			.section-body a:hover {
+				text-decoration: underline;
+			}
+
+			.tag-list {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 8px;
+				margin-top: 12px;
+			}
+
+			.tag {
+				display: inline-block;
+				padding: 5px 12px;
+				background: var(--red-dim);
+				border: 1px solid var(--border);
+				border-radius: 100px;
+				font-size: 13px;
+				font-weight: 600;
+				color: var(--text-sec);
+			}
+
+			.highlight-box {
+				background: rgba(16, 185, 129, 0.06);
+				border: 1px solid rgba(16, 185, 129, 0.25);
+				border-radius: var(--radius);
+				padding: 16px 20px;
+				margin-top: 14px;
+				font-size: 14px;
+				color: rgba(255, 255, 255, 0.6);
+			}
+
+			.highlight-box strong {
+				color: #10b981;
+			}
+
+			/* ── Divider ── */
+			.divider {
+				height: 1px;
+				background: var(--border);
+				margin: 6px 0;
+			}
+
+			/* ── Contact section ── */
+			.contact-card {
+				background: var(--red-dim);
+				border: 1px solid var(--border);
+				border-radius: var(--radius-lg);
+				padding: 28px;
+				text-align: center;
+				margin-top: 40px;
+			}
+
+			.contact-card p {
+				color: var(--text-sec);
+				font-size: 14px;
+				margin-bottom: 12px;
+			}
+
+			.contact-card a {
+				display: inline-block;
+				background: var(--red);
+				color: #fff;
+				font-size: 14px;
+				font-weight: 700;
+				letter-spacing: 1px;
+				padding: 14px 28px;
+				border-radius: 12px;
+				text-decoration: none;
+			}
+
+			.contact-card a:hover {
+				background: #b91c1c;
+			}
+
+			/* ── Footer ── */
+			footer {
+				border-top: 1px solid var(--border);
+				padding: 32px 24px;
+				text-align: center;
+			}
+
+			footer p {
+				font-size: 12px;
+				font-weight: 600;
+				letter-spacing: 3px;
+				color: var(--text-mute);
+				text-transform: uppercase;
+			}
+
+			footer span {
+				color: var(--red);
+			}
+
+			/* ── Responsive ── */
+			@media (max-width: 600px) {
+				header {
+					padding: 40px 20px 36px;
+				}
+				main {
+					padding: 32px 16px 60px;
+				}
+				.section-header,
+				.section-body {
+					padding-left: 20px;
+					padding-right: 20px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div>
+				<div class="logo-wrap">
+					<img src="/assets/icon.png" alt="Suss'd logo" />
+				</div>
+			</div>
+			<div class="brand">FE Labs</div>
+			<h1>Privacy Policy</h1>
+			<p class="updated">Last Updated: 28 May 2026</p>
+		</header>
+
+		<main>
+			<div class="intro">
+				Welcome to <strong>Suss'd</strong>. This Privacy Policy explains how the
+				Suss'd mobile application handles information when you use the game. By
+				using Suss'd, you agree to this Privacy Policy.
+			</div>
+
+			<!-- Information We Collect -->
+			<section>
+				<div class="section-header">
+					<div class="section-icon">🔍</div>
+					<h2>Information We Collect</h2>
+				</div>
+				<div class="section-body">
+					<p>Suss'd is designed to require minimal user information.</p>
+					<p>Players may optionally enter:</p>
+					<ul>
+						<li>Player names</li>
+						<li>Custom game words or phrases</li>
+					</ul>
+					<p>This information:</p>
+					<ul>
+						<li>Is stored locally on the device only</li>
+						<li>Is not uploaded to our servers</li>
+						<li>Is not shared with third parties</li>
+						<li>Is not permanently stored in the cloud</li>
+					</ul>
+					<div class="highlight-box">
+						<strong>No account required.</strong> We do not require account
+						creation, login details, email addresses, or phone numbers.
+					</div>
+				</div>
+			</section>
+
+			<!-- Local Device Storage -->
+			<section>
+				<div class="section-header">
+					<div class="section-icon">📱</div>
+					<h2>Local Device Storage</h2>
+				</div>
+				<div class="section-body">
+					<p>
+						Some game settings and preferences may be stored locally on your
+						device to improve gameplay experience. This may include:
+					</p>
+					<ul>
+						<li>Saved settings</li>
+						<li>Unlocked bundles</li>
+						<li>Game preferences</li>
+						<li>Locally created custom word packs</li>
+					</ul>
+					<p>
+						This data remains on your device unless deleted by the user or
+						removed when uninstalling the app.
+					</p>
+				</div>
+			</section>
+
+			<!-- Advertising -->
+			<section>
+				<div class="section-header">
+					<div class="section-icon">📢</div>
+					<h2>Advertising</h2>
+				</div>
+				<div class="section-body">
+					<p>
+						Suss'd may display advertisements using third-party advertising
+						services such as Google AdMob. These services may collect limited
+						anonymous data, including:
+					</p>
+					<ul>
+						<li>Device identifiers</li>
+						<li>Approximate location</li>
+						<li>Ad interaction data</li>
+						<li>Diagnostics and performance data</li>
+					</ul>
+					<p>
+						This information is used to display relevant ads, measure ad
+						performance, and improve the advertising experience.
+					</p>
+					<p>
+						For more information, please review the
+						<a
+							href="https://policies.google.com/privacy"
+							target="_blank"
+							rel="noopener"
+							>Google Privacy Policy</a
+						>.
+					</p>
+				</div>
+			</section>
+
+			<!-- In-App Purchases -->
+			<section>
+				<div class="section-header">
+					<div class="section-icon">🛒</div>
+					<h2>In-App Purchases</h2>
+				</div>
+				<div class="section-body">
+					<p>
+						Suss'd may offer optional paid content including premium word packs,
+						special game modes, cosmetic features, and ad removal.
+					</p>
+					<p>
+						Purchases are processed securely through the Apple App Store or
+						Google Play Store. We do not receive or store:
+					</p>
+					<ul>
+						<li>Credit card information</li>
+						<li>Banking information</li>
+						<li>Payment credentials</li>
+					</ul>
+					<p>
+						All payment processing is handled entirely by the platform provider.
+					</p>
+				</div>
+			</section>
+
+			<!-- Analytics -->
+			<section>
+				<div class="section-header">
+					<div class="section-icon">📊</div>
+					<h2>Analytics &amp; Diagnostics</h2>
+				</div>
+				<div class="section-body">
+					<p>
+						In the future, Suss'd may use analytics tools to help improve the
+						app experience. These tools may collect anonymous technical
+						information such as:
+					</p>
+					<ul>
+						<li>Crash reports</li>
+						<li>Device type</li>
+						<li>Operating system version</li>
+						<li>Gameplay session length</li>
+						<li>Feature usage</li>
+					</ul>
+					<p>This information does not personally identify users.</p>
+				</div>
+			</section>
+
+			<!-- Children's Privacy -->
+			<section>
+				<div class="section-header">
+					<div class="section-icon">👶</div>
+					<h2>Children's Privacy</h2>
+				</div>
+				<div class="section-body">
+					<p>
+						Suss'd is intended for general audiences and may contain mature
+						humour or adult-themed content. The app is not specifically directed
+						toward children under 13.
+					</p>
+					<p>We do not knowingly collect personal information from children.</p>
+				</div>
+			</section>
+
+			<!-- Data Security -->
+			<section>
+				<div class="section-header">
+					<div class="section-icon">🔒</div>
+					<h2>Data Security</h2>
+				</div>
+				<div class="section-body">
+					<p>
+						Because Suss'd stores gameplay information locally and does not
+						maintain user accounts, the amount of personal data collected is
+						minimal.
+					</p>
+					<p>
+						We take reasonable measures to help protect any information
+						processed through third-party services.
+					</p>
+				</div>
+			</section>
+
+			<!-- Third-Party Services -->
+			<section>
+				<div class="section-header">
+					<div class="section-icon">🔗</div>
+					<h2>Third-Party Services</h2>
+				</div>
+				<div class="section-body">
+					<p>
+						Suss'd may use the following third-party services, each with their
+						own privacy policies and terms:
+					</p>
+					<div class="tag-list">
+						<span class="tag">Apple App Store</span>
+						<span class="tag">Google Play Services</span>
+						<span class="tag">Google AdMob</span>
+						<span class="tag">RevenueCat</span>
+					</div>
+				</div>
+			</section>
+
+			<!-- Your Rights -->
+			<section>
+				<div class="section-header">
+					<div class="section-icon">⚖️</div>
+					<h2>Your Rights</h2>
+				</div>
+				<div class="section-body">
+					<p>
+						Depending on your region, you may have rights relating to your
+						personal data, including:
+					</p>
+					<ul>
+						<li>Access to data</li>
+						<li>Deletion requests</li>
+						<li>Restriction of processing</li>
+						<li>Withdrawal of consent</li>
+					</ul>
+					<p>
+						Because Suss'd does not maintain user accounts or cloud storage,
+						most data remains under your direct control on your device.
+					</p>
+				</div>
+			</section>
+
+			<!-- Changes -->
+			<section>
+				<div class="section-header">
+					<div class="section-icon">📋</div>
+					<h2>Changes to This Privacy Policy</h2>
+				</div>
+				<div class="section-body">
+					<p>
+						We may update this Privacy Policy occasionally. Changes will be
+						posted within the app or App Store listing with an updated revision
+						date.
+					</p>
+				</div>
+			</section>
+
+			<!-- Contact -->
+			<div class="contact-card">
+				<p>Questions about this Privacy Policy?</p>
+				<a href="mailto:sussd@outlook.com">sussd@outlook.com</a>
+			</div>
+		</main>
+
+		<footer>
+			<p>&copy; 2026 FE Labs &nbsp;·&nbsp; <span>TRUST NO ONE</span></p>
+		</footer>
+	</body>
+</html>

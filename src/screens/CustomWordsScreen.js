@@ -7,6 +7,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import * as Haptics from 'expo-haptics';
 import { colors, spacing, radius } from '../theme';
 
+const RED = '#DC2626';
+
 export default function CustomWordsScreen({ navigate, customWords, onCustomWordsChange }) {
   const [word1, setWord1] = useState('');
   const [word2, setWord2] = useState('');
@@ -33,7 +35,7 @@ export default function CustomWordsScreen({ navigate, customWords, onCustomWords
   const canAdd = word1.trim().length > 0 && word2.trim().length > 0;
 
   return (
-    <LinearGradient colors={['#0D0B1E', '#030712']} style={styles.container}>
+    <LinearGradient colors={['#1a0000', '#000000']} style={styles.container}>
       <SafeAreaView style={styles.safe}>
         <KeyboardAvoidingView style={styles.kav} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
           <Animated.View style={[styles.content, { opacity: fadeAnim }]}>
@@ -59,7 +61,7 @@ export default function CustomWordsScreen({ navigate, customWords, onCustomWords
                   maxLength={24}
                   returnKeyType="next"
                   onSubmitEditing={() => word2Ref.current?.focus()}
-                  selectionColor={colors.primary}
+                  selectionColor={RED}
                 />
                 <Text style={styles.inputDivider}>↔</Text>
                 <TextInput
@@ -72,7 +74,7 @@ export default function CustomWordsScreen({ navigate, customWords, onCustomWords
                   maxLength={24}
                   returnKeyType="done"
                   onSubmitEditing={handleAdd}
-                  selectionColor={colors.primary}
+                  selectionColor={RED}
                 />
               </View>
               <TouchableOpacity
@@ -81,7 +83,7 @@ export default function CustomWordsScreen({ navigate, customWords, onCustomWords
                 disabled={!canAdd}
               >
                 <LinearGradient
-                  colors={canAdd ? ['#6366F1', '#4338CA'] : ['#1F2937', '#1F2937']}
+                  colors={canAdd ? ['#DC2626', '#B91C1C'] : ['#1F2937', '#1F2937']}
                   style={styles.addBtn}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 0 }}

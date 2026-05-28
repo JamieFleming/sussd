@@ -7,6 +7,10 @@ import { LinearGradient } from 'expo-linear-gradient';
 import * as Haptics from 'expo-haptics';
 import { colors, spacing, radius } from '../theme';
 
+const RED = '#DC2626';
+const RED_DIM = 'rgba(220,38,38,0.15)';
+const RED_BORDER = 'rgba(220,38,38,0.4)';
+
 export default function VoteScreen({ navigate, gameState }) {
   const { players, secondVote, voteTarget: firstCaught } = gameState;
   const [selected, setSelected] = useState(null);
@@ -48,7 +52,7 @@ export default function VoteScreen({ navigate, gameState }) {
   };
 
   return (
-    <LinearGradient colors={['#0D0B1E', '#030712']} style={styles.container}>
+    <LinearGradient colors={['#1a0000', '#000000']} style={styles.container}>
       <SafeAreaView style={styles.safe}>
         <Animated.View style={[styles.content, { opacity: fadeAnim }]}>
 
@@ -156,9 +160,9 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 22,
-    backgroundColor: 'rgba(99,102,241,0.15)',
+    backgroundColor: RED_DIM,
     borderWidth: 1,
-    borderColor: 'rgba(99,102,241,0.3)',
+    borderColor: RED_BORDER,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -167,7 +171,7 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(239,68,68,0.5)',
   },
   avatarText: {
-    color: colors.primary,
+    color: RED,
     fontWeight: '800',
     fontSize: 16,
   },

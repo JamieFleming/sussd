@@ -239,7 +239,7 @@ export default function ResultScreen({ navigate, gameState, settings, sessionSco
 
             <TouchableOpacity onPress={handleNewGame} activeOpacity={0.85}>
               <LinearGradient
-                colors={['#6366F1', '#4338CA']}
+                colors={['#DC2626', '#B91C1C']}
                 style={styles.actionBtn}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
@@ -290,7 +290,7 @@ export default function ResultScreen({ navigate, gameState, settings, sessionSco
             <View style={styles.buttonStack}>
               <TouchableOpacity onPress={handlePlayAgain} activeOpacity={0.85}>
                 <LinearGradient
-                  colors={['#6366F1', '#4338CA']}
+                  colors={['#DC2626', '#B91C1C']}
                   style={styles.actionBtn}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 0 }}
@@ -305,7 +305,7 @@ export default function ResultScreen({ navigate, gameState, settings, sessionSco
           ) : (
             <TouchableOpacity onPress={handleNewGame} activeOpacity={0.85}>
               <LinearGradient
-                colors={['#6366F1', '#4338CA']}
+                colors={['#DC2626', '#B91C1C']}
                 style={styles.actionBtn}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}

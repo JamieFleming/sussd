@@ -7,6 +7,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import * as Haptics from 'expo-haptics';
 import { colors, spacing, radius } from '../theme';
 
+const RED = '#DC2626';
+
 export default function PlayerRevealScreen({ navigate, gameState }) {
   const { players, currentPlayerIndex } = gameState;
   const player = players[currentPlayerIndex];
@@ -26,7 +28,7 @@ export default function PlayerRevealScreen({ navigate, gameState }) {
   };
 
   return (
-    <LinearGradient colors={['#0D0B1E', '#030712']} style={styles.container}>
+    <LinearGradient colors={['#1a0000', '#000000']} style={styles.container}>
       <SafeAreaView style={styles.safe}>
         <Animated.View style={[styles.content, { opacity: fadeAnim, transform: [{ translateY: slideAnim }] }]}>
 
@@ -44,7 +46,7 @@ export default function PlayerRevealScreen({ navigate, gameState }) {
 
           <TouchableOpacity onPress={handleReveal} activeOpacity={0.85}>
             <LinearGradient
-              colors={['#6366F1', '#4338CA']}
+              colors={['#DC2626', '#B91C1C']}
               style={styles.revealBtn}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}

@@ -9,6 +9,10 @@ import { colors, spacing, radius } from '../theme';
 import { createGame, getImposterCount } from '../utils/gameLogic';
 import { CATEGORIES } from '../data/wordSets';
 
+const RED = '#DC2626';
+const RED_DIM = 'rgba(220,38,38,0.12)';
+const RED_BORDER = 'rgba(220,38,38,0.35)';
+
 const DEFAULT_NAMES = (count) => Array.from({ length: count }, (_, i) => `Player ${i + 1}`);
 
 export default function SetupScreen({ navigate, settings, customWords }) {
@@ -58,7 +62,7 @@ export default function SetupScreen({ navigate, settings, customWords }) {
   };
 
   return (
-    <LinearGradient colors={['#0D0B1E', '#030712']} style={styles.container}>
+    <LinearGradient colors={['#1a0000', '#000000']} style={styles.container}>
       <SafeAreaView style={styles.safe}>
         <KeyboardAvoidingView
           style={styles.kav}
@@ -159,7 +163,7 @@ export default function SetupScreen({ navigate, settings, customWords }) {
                     placeholderTextColor={colors.textMuted}
                     maxLength={20}
                     returnKeyType="done"
-                    selectionColor={colors.primary}
+                    selectionColor={RED}
                   />
                 </View>
               ))}
@@ -167,7 +171,7 @@ export default function SetupScreen({ navigate, settings, customWords }) {
 
             <TouchableOpacity onPress={handleStart} activeOpacity={0.85}>
               <LinearGradient
-                colors={['#6366F1', '#4338CA']}
+                colors={['#DC2626', '#B91C1C']}
                 style={styles.startBtn}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
@@ -273,15 +277,15 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surface,
   },
   categoryPillActive: {
-    borderColor: colors.primary,
-    backgroundColor: 'rgba(99,102,241,0.15)',
+    borderColor: RED_BORDER,
+    backgroundColor: RED_DIM,
   },
   categoryPillText: {
     color: colors.textSecondary,
     fontSize: 13,
     fontWeight: '600',
   },
-  categoryPillTextActive: { color: colors.primary },
+  categoryPillTextActive: { color: RED },
   namesList: { flex: 1 },
   namesContent: { gap: spacing.sm, paddingBottom: spacing.md },
   nameRow: {
@@ -293,14 +297,14 @@ const styles = StyleSheet.create({
     width: 36,
     height: 36,
     borderRadius: 18,
-    backgroundColor: 'rgba(99,102,241,0.15)',
+    backgroundColor: RED_DIM,
     borderWidth: 1,
-    borderColor: 'rgba(99,102,241,0.3)',
+    borderColor: RED_BORDER,
     alignItems: 'center',
     justifyContent: 'center',
   },
   nameIndexText: {
-    color: colors.primary,
+    color: RED,
     fontSize: 14,
     fontWeight: '800',
   },

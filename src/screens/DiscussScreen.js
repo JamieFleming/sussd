@@ -7,6 +7,10 @@ import { LinearGradient } from 'expo-linear-gradient';
 import * as Haptics from 'expo-haptics';
 import { colors, spacing, radius } from '../theme';
 
+const RED = '#DC2626';
+const RED_DIM = 'rgba(220,38,38,0.12)';
+const RED_BORDER = 'rgba(220,38,38,0.35)';
+
 const TIPS = [
   "Don't say your word directly",
   'Listen for anything suspicious',
@@ -82,7 +86,7 @@ export default function DiscussScreen({ navigate, gameState, settings }) {
   const isUp = settings.timerEnabled && timeLeft === 0;
 
   return (
-    <LinearGradient colors={['#0D0B1E', '#030712']} style={styles.container}>
+    <LinearGradient colors={['#1a0000', '#000000']} style={styles.container}>
       <SafeAreaView style={styles.safe}>
         <Animated.View style={[styles.content, { opacity: fadeAnim }]}>
 
@@ -122,7 +126,7 @@ export default function DiscussScreen({ navigate, gameState, settings }) {
                         inputRange: [0, 1],
                         outputRange: [0, trackWidth],
                       }),
-                      backgroundColor: isLow ? '#EF4444' : colors.primary,
+                      backgroundColor: isLow ? '#EF4444' : RED,
                     },
                   ]}
                 />
@@ -152,7 +156,7 @@ export default function DiscussScreen({ navigate, gameState, settings }) {
 
           <TouchableOpacity onPress={handleVote} activeOpacity={0.85}>
             <LinearGradient
-              colors={['#6366F1', '#4338CA']}
+              colors={['#DC2626', '#B91C1C']}
               style={styles.voteBtn}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
@@ -180,14 +184,14 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     paddingHorizontal: spacing.lg,
     paddingVertical: spacing.xs + 2,
-    backgroundColor: 'rgba(99,102,241,0.15)',
+    backgroundColor: RED_DIM,
     borderRadius: radius.full,
     borderWidth: 1,
-    borderColor: 'rgba(99,102,241,0.3)',
+    borderColor: RED_BORDER,
     marginBottom: spacing.lg,
   },
   roundText: {
-    color: colors.primary,
+    color: RED,
     fontSize: 12,
     fontWeight: '700',
     letterSpacing: 4,
@@ -258,7 +262,7 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: colors.primary,
+    backgroundColor: RED,
   },
   tipText: {
     color: colors.textSecondary,
