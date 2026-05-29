@@ -120,6 +120,15 @@ export default function SettingsScreen({
               <View style={styles.divider} />
 
               <SettingRow
+                label="Timer Sound"
+                desc="Alert sound when the countdown hits zero"
+                value={settings.soundEnabled}
+                onToggle={(v) => onSettingsChange({ soundEnabled: v })}
+              />
+
+              <View style={styles.divider} />
+
+              <SettingRow
                 label="Session Scoreboard"
                 desc="Track wins across games in one session"
                 value={settings.scoreboardEnabled}

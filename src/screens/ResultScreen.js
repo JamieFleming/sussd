@@ -107,14 +107,21 @@ export default function ResultScreen({
 		]).start();
 	}, []);
 
-	// Record score on mount for all win types and for backfired
+	// Record score on mount for wins and backfire only
+	// Wrong vote stays unrecorded until the user taps REVEAL
 	useEffect(() => {
 		if (scoreRecorded) return;
-		setScoreRecorded(true);
-		if (isNormalWin) onScoreUpdate("innocents", 1);
-		else if (isDoubleWin) onScoreUpdate("innocents", 2);
-		else if (isBackfired) onScoreUpdate("imposters", 1);
-		// wrong vote: score recorded on reveal tap
+		if (isNormalWin) {
+			setScoreRecorded(true);
+			onScoreUpdate("innocents", 1);
+		} else if (isDoubleWin) {
+			setScoreRecorded(true);
+			onScoreUpdate("innocents", 2);
+		} else if (isBackfired) {
+			setScoreRecorded(true);
+			onScoreUpdate("imposters", 1);
+		}
+		// Wrong vote: scoreRecorded stays false until REVEAL is tapped
 	}, []);
 
 	// Typing animation (win screens only)
@@ -182,8 +189,13 @@ export default function ResultScreen({
 		setRevealed(true);
 	};
 
-	const handleNewGame = async () => {
+	const handleGoToSetup = async () => {
 		await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+		navigate("setup");
+	};
+
+	const handleGoHome = async () => {
+		await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
 		navigate("home");
 	};
 
@@ -269,17 +281,20 @@ export default function ResultScreen({
 							<Scoreboard sessionScores={sessionScores} />
 						)}
 
-						<TouchableOpacity onPress={handleNewGame} activeOpacity={0.85}>
-							<LinearGradient
-								colors={
-									isDoubleWin ? ["#F59E0B", "#D97706"] : ["#10B981", "#059669"]
-								}
-								style={styles.actionBtn}
-								start={{ x: 0, y: 0 }}
-								end={{ x: 1, y: 0 }}>
-								<Text style={styles.actionBtnText}>PLAY AGAIN</Text>
-							</LinearGradient>
-						</TouchableOpacity>
+						<View style={styles.buttonStack}>
+							<TouchableOpacity onPress={handleGoToSetup} activeOpacity={0.85}>
+								<LinearGradient
+									colors={isDoubleWin ? ["#F59E0B", "#D97706"] : ["#10B981", "#059669"]}
+									style={styles.actionBtn}
+									start={{ x: 0, y: 0 }}
+									end={{ x: 1, y: 0 }}>
+									<Text style={styles.actionBtnText}>PLAY AGAIN</Text>
+								</LinearGradient>
+							</TouchableOpacity>
+							<TouchableOpacity style={styles.secondaryBtn} onPress={handleGoHome} activeOpacity={0.7}>
+								<Text style={styles.secondaryBtnText}>END SESSION</Text>
+							</TouchableOpacity>
+						</View>
 					</Animated.View>
 				</SafeAreaView>
 			</LinearGradient>
@@ -329,15 +344,20 @@ export default function ResultScreen({
 							)}
 						</View>
 
-						<TouchableOpacity onPress={handleNewGame} activeOpacity={0.85}>
-							<LinearGradient
-								colors={["#DC2626", "#B91C1C"]}
-								style={styles.actionBtn}
-								start={{ x: 0, y: 0 }}
-								end={{ x: 1, y: 0 }}>
-								<Text style={styles.actionBtnText}>NEW GAME</Text>
-							</LinearGradient>
-						</TouchableOpacity>
+						<View style={styles.buttonStack}>
+							<TouchableOpacity onPress={handleGoToSetup} activeOpacity={0.85}>
+								<LinearGradient
+									colors={["#DC2626", "#B91C1C"]}
+									style={styles.actionBtn}
+									start={{ x: 0, y: 0 }}
+									end={{ x: 1, y: 0 }}>
+									<Text style={styles.actionBtnText}>PLAY AGAIN</Text>
+								</LinearGradient>
+							</TouchableOpacity>
+							<TouchableOpacity style={styles.secondaryBtn} onPress={handleGoHome} activeOpacity={0.7}>
+								<Text style={styles.secondaryBtnText}>END SESSION</Text>
+							</TouchableOpacity>
+						</View>
 					</Animated.View>
 				</SafeAreaView>
 			</LinearGradient>
@@ -412,15 +432,20 @@ export default function ResultScreen({
 							</TouchableOpacity>
 						</View>
 					) : (
-						<TouchableOpacity onPress={handleNewGame} activeOpacity={0.85}>
-							<LinearGradient
-								colors={["#DC2626", "#B91C1C"]}
-								style={styles.actionBtn}
-								start={{ x: 0, y: 0 }}
-								end={{ x: 1, y: 0 }}>
-								<Text style={styles.actionBtnText}>NEW GAME</Text>
-							</LinearGradient>
-						</TouchableOpacity>
+						<View style={styles.buttonStack}>
+							<TouchableOpacity onPress={handleGoToSetup} activeOpacity={0.85}>
+								<LinearGradient
+									colors={["#DC2626", "#B91C1C"]}
+									style={styles.actionBtn}
+									start={{ x: 0, y: 0 }}
+									end={{ x: 1, y: 0 }}>
+									<Text style={styles.actionBtnText}>PLAY AGAIN</Text>
+								</LinearGradient>
+							</TouchableOpacity>
+							<TouchableOpacity style={styles.secondaryBtn} onPress={handleGoHome} activeOpacity={0.7}>
+								<Text style={styles.secondaryBtnText}>END SESSION</Text>
+							</TouchableOpacity>
+						</View>
 					)}
 				</Animated.View>
 			</SafeAreaView>
@@ -620,5 +645,18 @@ const styles = StyleSheet.create({
 		fontSize: 15,
 		fontWeight: "600",
 		letterSpacing: 1,
+	},
+	secondaryBtn: {
+		paddingVertical: 16,
+		alignItems: "center",
+		borderRadius: radius.lg,
+		borderWidth: 1,
+		borderColor: colors.border,
+	},
+	secondaryBtnText: {
+		color: colors.textMuted,
+		fontSize: 14,
+		fontWeight: "600",
+		letterSpacing: 2,
 	},
 });

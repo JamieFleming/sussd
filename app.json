@@ -11,6 +11,13 @@
       "backgroundColor": "#000000"
     },
     "userInterfaceStyle": "dark",
+    "updates": {
+      "url": "https://u.expo.dev/70c28904-8f0b-4b41-bc94-bc1657abe39f",
+      "checkAutomatically": "ON_LOAD"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.felabs.suss",

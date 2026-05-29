@@ -1,10 +1,11 @@
 import React, { useRef, useEffect, useState } from 'react';
 import {
   View, Text, StyleSheet, TouchableOpacity,
-  Animated, SafeAreaView,
+  Animated, SafeAreaView, Alert,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Haptics from 'expo-haptics';
+import { Audio } from 'expo-av';
 import { colors, spacing, radius } from '../theme';
 
 const RED = '#DC2626';
@@ -20,6 +21,7 @@ const TIPS = [
 export default function DiscussScreen({ navigate, gameState, settings }) {
   const roundNumber = (gameState.votesWrong || 0) + 1;
   const isFirstVote = roundNumber === 1;
+  const { firstPlayer } = gameState;
 
   const [timeLeft, setTimeLeft] = useState(settings.timerDuration);
   const [paused, setPaused] = useState(false);
@@ -82,6 +84,17 @@ export default function DiscussScreen({ navigate, gameState, settings }) {
     navigate('vote', gameState);
   };
 
+  const handleEndGame = () => {
+    Alert.alert(
+      'End Game?',
+      'This will abandon the current game and return to home.',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'End Game', style: 'destructive', onPress: () => navigate('home') },
+      ]
+    );
+  };
+
   const isLow = settings.timerEnabled && timeLeft <= 10 && timeLeft > 0;
   const isUp = settings.timerEnabled && timeLeft === 0;
 
@@ -90,10 +103,23 @@ export default function DiscussScreen({ navigate, gameState, settings }) {
       <SafeAreaView style={styles.safe}>
         <Animated.View style={[styles.content, { opacity: fadeAnim }]}>
 
-          {/* Round badge */}
-          <View style={styles.roundBadge}>
-            <Text style={styles.roundText}>ROUND {roundNumber}</Text>
+          {/* Top row: round badge + end game */}
+          <View style={styles.topRow}>
+            <View style={styles.roundBadge}>
+              <Text style={styles.roundText}>ROUND {roundNumber}</Text>
+            </View>
+            <TouchableOpacity onPress={handleEndGame} style={styles.endBtn} activeOpacity={0.7}>
+              <Text style={styles.endBtnText}>END</Text>
+            </TouchableOpacity>
           </View>
+
+          {/* First player card — round 1 only */}
+          {isFirstVote && firstPlayer && (
+            <View style={styles.firstPlayerCard}>
+              <Text style={styles.firstPlayerLabel}>GOES FIRST</Text>
+              <Text style={styles.firstPlayerName}>{firstPlayer.name}</Text>
+            </View>
+          )}
 
           {/* Timer */}
           {settings.timerEnabled && (
@@ -180,21 +206,63 @@ const styles = StyleSheet.create({
     paddingTop: spacing.xl,
     paddingBottom: 56,
   },
+  topRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: spacing.md,
+  },
   roundBadge: {
-    alignSelf: 'center',
     paddingHorizontal: spacing.lg,
     paddingVertical: spacing.xs + 2,
-    backgroundColor: RED_DIM,
+    backgroundColor: RED,
     borderRadius: radius.full,
     borderWidth: 1,
-    borderColor: RED_BORDER,
-    marginBottom: spacing.lg,
+    borderColor: RED,
   },
   roundText: {
-    color: RED,
+    color: '#FFFFFF',
     fontSize: 12,
     fontWeight: '700',
     letterSpacing: 4,
+  },
+  endBtn: {
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.xs + 2,
+    backgroundColor: colors.surface,
+    borderRadius: radius.full,
+    borderWidth: 1,
+    borderColor: colors.border,
+  },
+  endBtnText: {
+    color: colors.textMuted,
+    fontSize: 12,
+    fontWeight: '700',
+    letterSpacing: 2,
+  },
+  firstPlayerCard: {
+    width: '100%',
+    paddingVertical: spacing.md,
+    paddingHorizontal: spacing.lg,
+    backgroundColor: RED,
+    borderRadius: radius.md,
+    borderWidth: 1,
+    borderColor: RED,
+    alignItems: 'center',
+    gap: 2,
+    marginBottom: spacing.md,
+  },
+  firstPlayerLabel: {
+    color: 'rgba(255,255,255,0.7)',
+    fontSize: 10,
+    fontWeight: '700',
+    letterSpacing: 4,
+  },
+  firstPlayerName: {
+    color: '#FFFFFF',
+    fontSize: 28,
+    fontWeight: '900',
+    letterSpacing: -1,
   },
   timerSection: {
     marginBottom: spacing.xl,
