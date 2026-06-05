@@ -73,16 +73,15 @@ export default function App() {
 	// Check for OTA updates and reload immediately when one is available
 	useEffect(() => {
 		async function checkForUpdate() {
+			if (__DEV__) return;
 			try {
-				if (!Updates.isEmbeddedLaunch) {
-					const update = await Updates.checkForUpdateAsync();
-					if (update.isAvailable) {
-						await Updates.fetchUpdateAsync();
-						await Updates.reloadAsync();
-					}
+				const update = await Updates.checkForUpdateAsync();
+				if (update.isAvailable) {
+					await Updates.fetchUpdateAsync();
+					await Updates.reloadAsync();
 				}
 			} catch (_) {
-				// Silently ignore — no network, dev mode, etc.
+				// Silently ignore — no network etc.
 			}
 		}
 		checkForUpdate();
