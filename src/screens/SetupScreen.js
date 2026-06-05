@@ -245,7 +245,7 @@ export default function SetupScreen({
                 <Text style={styles.sectionLabel}>CATEGORY</Text>
                 <ScrollView
                   horizontal
-                  showsHorizontalScrollIndicator={false}
+                  showsHorizontalScrollIndicator={true}
                   contentContainerStyle={styles.categoryRow}>
                   {/* In child-friendly mode show All plus child-safe categories */}
                   {CATEGORIES.filter((cat) =>
