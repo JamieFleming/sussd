@@ -1,5 +1,7 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import { StatusBar } from "expo-status-bar";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { ThemeProvider } from "./src/ThemeContext";
 import HomeScreen from "./src/screens/HomeScreen";
 import SetupScreen from "./src/screens/SetupScreen";
 import PlayerRevealScreen from "./src/screens/PlayerRevealScreen";
@@ -24,6 +26,8 @@ const DEFAULT_SETTINGS = {
 	scoreboardEnabled: true,
 	categoriesEnabled: false,
 	customWordsEnabled: false,
+	lightMode: false,
+	childFriendly: false,
 };
 
 export default function App() {
@@ -39,9 +43,10 @@ export default function App() {
 	const [lastPlayers, setLastPlayers] = useState(null);
 	const isFirstLoad = useRef(true);
 
-	// Load players from previous game
+	// Snapshot the full player list only at the start of a fresh game,
+	// so players removed mid-game don't carry over to the next setup screen.
 	useEffect(() => {
-		if (gameState?.players) {
+		if (gameState?.players && (gameState.votesWrong ?? 0) === 0) {
 			setLastPlayers(gameState.players.map((p) => p.name));
 		}
 	}, [gameState]);
@@ -108,6 +113,8 @@ export default function App() {
 						settings={settings}
 						customWords={customWords}
 						lastPlayers={lastPlayers}
+						lastCategories={gameState?.savedCategories ?? null}
+						lastImposterChoice={gameState?.savedImposterChoice ?? null}
 					/>
 				);
 			case "playerReveal":
@@ -160,9 +167,11 @@ export default function App() {
 	};
 
 	return (
-		<>
-			<StatusBar style="light" />
-			{renderScreen()}
-		</>
+		<SafeAreaProvider>
+			<ThemeProvider isDark={!settings.lightMode}>
+				<StatusBar style={settings.lightMode ? "dark" : "light"} />
+				{renderScreen()}
+			</ThemeProvider>
+		</SafeAreaProvider>
 	);
 }

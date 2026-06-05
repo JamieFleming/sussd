@@ -56,9 +56,12 @@ export function createGame(
 			pool = wordSets.filter((w) => !LOCKED_CATEGORIES.includes(w.category));
 	}
 
-	// Apply child-friendly filter on top of whatever pool we built
+	// Apply child-friendly filter on top of whatever pool we built.
+	// A set is safe if its category is child-friendly OR it is individually marked.
 	if (childFriendly) {
-		const cfPool = pool.filter((w) => CHILD_FRIENDLY_CATS.has(w.category));
+		const cfPool = pool.filter(
+			(w) => CHILD_FRIENDLY_CATS.has(w.category) || w.childFriendly === true,
+		);
 		// Fall back to full pool only if nothing survives (shouldn't happen in practice)
 		if (cfPool.length > 0) pool = cfPool;
 	}
@@ -96,9 +99,12 @@ export function createGame(
 	// Hard cap at 2, and never more imposters than players - 1
 	imposterCount = Math.min(imposterCount, 2, playerCount - 1);
 
-	const shuffledIndexes = [...players.map((_, i) => i)].sort(
-		() => Math.random() - 0.5,
-	);
+	// Fisher-Yates shuffle to ensure imposters are truly random (no consecutive bias)
+	const shuffledIndexes = players.map((_, i) => i);
+	for (let i = shuffledIndexes.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		[shuffledIndexes[i], shuffledIndexes[j]] = [shuffledIndexes[j], shuffledIndexes[i]];
+	}
 	for (let i = 0; i < imposterCount; i++) {
 		players[shuffledIndexes[i]].isImposter = true;
 	}
@@ -112,7 +118,8 @@ export function createGame(
 		imposterWord,
 		currentPlayerIndex: 0,
 		imposterCount,
-		canDoubleDown: playerCount >= 5,
+		// Only offer double-down when there genuinely are 2 imposters
+		canDoubleDown: imposterCount === 2,
 		firstPlayer,
 		votesWrong: 0,
 		voteTarget: null,
