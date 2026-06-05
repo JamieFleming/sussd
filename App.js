@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import * as Updates from "expo-updates";
 import { ThemeProvider } from "./src/ThemeContext";
 import HomeScreen from "./src/screens/HomeScreen";
 import SetupScreen from "./src/screens/SetupScreen";
@@ -67,6 +68,24 @@ export default function App() {
 			isFirstLoad.current = false;
 		}
 		hydrate();
+	}, []);
+
+	// Check for OTA updates and reload immediately when one is available
+	useEffect(() => {
+		async function checkForUpdate() {
+			try {
+				if (!Updates.isEmbeddedLaunch) {
+					const update = await Updates.checkForUpdateAsync();
+					if (update.isAvailable) {
+						await Updates.fetchUpdateAsync();
+						await Updates.reloadAsync();
+					}
+				}
+			} catch (_) {
+				// Silently ignore — no network, dev mode, etc.
+			}
+		}
+		checkForUpdate();
 	}, []);
 
 	// Persist settings whenever they change (skip the initial load)
